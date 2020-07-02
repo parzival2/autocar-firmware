@@ -1,0 +1,5 @@
+import("icm20948_rtt_imu");
+loadComponent("ICM20948", "Icm20948_rtt_imu");
+connect("ICM20948.interruptOut", "ICM20948.interruptIn", ConnPolicy());
+ICM20948.configure();
+ICM20948.start();

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>icm20948_rtt_imu</name>
+  <version>0.0.0</version>
+  <description>
+    Component to acquire Accelerometer and Gyroscope data from ICM20948 IMU(Inertial Measurement Unit)
+    This component will be triggered when ever a Gyroscope data can be read from the sensor and it 
+    will be notified using an interrupt.
+  </description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
+  <!-- Example:  -->
+  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
+  <maintainer email="r.kalyan.sreenivas@gmail.com">kalyan</maintainer>
+
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
+  <license>TODO</license>
+
+  <depend>sensor_msgs</depend>
+  <depend>rtt</depend>
+  <depend>ocl</depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

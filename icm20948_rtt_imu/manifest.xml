@@ -1,0 +1,11 @@
+<package>
+    <description brief="Orocos icm20948_rtt_imu Component package">
+        This package contains the components of the icm20948_rtt_imu package
+    </description>
+    <!--NOTE: set the license and author before you publish this code-->
+    <license></license>
+    <author>Unknown Author</author>
+    <rosdep name="rtt" />
+    <rosdep name="orogen" />
+</package>
+
