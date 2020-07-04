@@ -165,7 +165,7 @@ endif()
 if(${ARCHITECTURE} MATCHES "arm")
     target_link_libraries(raspi_icm_pigpio
         ${catkin_LIBRARIES}
-        -lpigpio
+        -lpigpiod_if2
         -lrt
     )
 else()

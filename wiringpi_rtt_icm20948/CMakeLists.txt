@@ -11,7 +11,7 @@ add_compile_options(-std=c++11)
 # This creates a standard cmake project. You may extend this file with
 # any cmake macro you see fit.
 #
-project(icm20948_rtt_imu)
+project(wiringpi_rtt_icm20948)
 
 # Use 'source orocos_toolchain/env.sh' if the command below fails:
 find_package(OROCOS-RTT QUIET)
@@ -26,7 +26,7 @@ include( ${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake )
 # Rest of the configuration is in src/
 add_subdirectory( src )
 
-add_custom_target(icm20948_rtt_imu_extras ALL SOURCES ${CMAKE_SOURCE_DIR}/icm20948_rtt_imu.ops)
+add_custom_target(wiringpi_rtt_icm20948_extras ALL SOURCES ${CMAKE_SOURCE_DIR}/icm20948_rtt_imu.ops)
 
 #
 # Generates and installs our package. Must be the last statement such

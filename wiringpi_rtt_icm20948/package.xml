@@ -1,12 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>icm20948_rtt_imu</name>
+  <name>wiringpi_rtt_icm20948</name>
   <version>0.0.0</version>
-  <description>
-    Component to acquire Accelerometer and Gyroscope data from ICM20948 IMU(Inertial Measurement Unit)
-    This component will be triggered when ever a Gyroscope data can be read from the sensor and it 
-    will be notified using an interrupt.
-  </description>
+  <description>The driver for ICM20948 imu which will be embedded on Waveshare Sense hat for raspberry pi.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -18,11 +14,14 @@
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>TODO</license>
-
+  
   <depend>sensor_msgs</depend>
-  <depend>rtt</depend>
-  <depend>ocl</depend>
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->

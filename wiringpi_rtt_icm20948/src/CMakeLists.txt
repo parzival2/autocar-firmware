@@ -11,7 +11,7 @@ include_directories(src)
 # Creates a component library libicm20948_rtt_imu-<target>.so
 # and installs in the directory lib/orocos/icm20948_rtt_imu/
 #
-orocos_component(icm20948_rtt_imu
+orocos_component(wiringpi_rtt_icm20948
     icm20948_rtt_imu-component.hpp
     icm20948_rtt_imu-component.cpp) # ...you may add multiple source files
 #
@@ -26,5 +26,5 @@ orocos_install_headers(icm20948_rtt_imu-component.hpp) # ...you may add multiple
 #
 # You may add multiple orocos_install_headers statements.
 
-target_link_libraries(icm20948_rtt_imu -lwiringPi)
+target_link_libraries(wiringpi_rtt_icm20948 -lwiringPi)
 

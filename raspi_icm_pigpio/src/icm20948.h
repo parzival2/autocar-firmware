@@ -2,9 +2,9 @@
 #define ICM20948_H
 #include "icm20948_register.h"
 #ifdef __arm__
-#include <pigpio.h>
+#include <pigpiod_if2.h>
 #else
-#include <raspi_icm_imu/pigpio.h>
+#include <raspi_icm_imu/pigpiod_if2.h>
 #endif
 // ROS related headers
 #include <functional>
@@ -65,7 +65,8 @@ class icm20948
     const CommunicationState& initialize();
     void probeDevice();
     const CommunicationState& getCommunicationState() const;
-    static void handleInterrupt(int gpio, int level, uint32_t tick, void* imuPointer);
+    static void handleInterrupt(int pi, uint32_t gpio, uint32_t level, uint32_t tick,
+                                void* imuPointer);
     void setImuValueFunction(SetImuValues& imuValueFunction);
     void cleanup();
 
@@ -93,6 +94,8 @@ class icm20948
      * @brief mICMCurrentState The current state of communications with the device.
      */
     CommunicationState mICMCurrentState;
+
+    int mPiHandle;
 
     /**
      * @brief mI2cDeviceId The wiringpi library returns a device ID which should be used for all
