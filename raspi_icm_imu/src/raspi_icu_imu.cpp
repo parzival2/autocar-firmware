@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 
     // Nodehandle
     ros::NodeHandle nodeHandle  = ros::NodeHandle();
-    ros::Publisher imuPublisher = nodeHandle.advertise<sensor_msgs::Imu>("imu", 10);
+    ros::Publisher imuPublisher = nodeHandle.advertise<sensor_msgs::Imu>("imu/data_raw", 10);
 #ifdef __arm__
     icm20948 icmImuDevice;
 

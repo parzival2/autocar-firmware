@@ -27,7 +27,8 @@ class icm20948
     static constexpr float ACCEL_8G  = 4096.0;
     static constexpr float ACCEL_16G = 2048.0;
     // Acceleration due to gravity for converting g's to m/sec^2.
-    static constexpr float ACCEL_DUE_TO_GRAVITY = 9.80665;
+    static constexpr float ACCEL_DUE_TO_GRAVITY  = 9.80665;
+    static constexpr float DEGREES_TO_RAD_FACTOR = 0.0174533;
     /**
      * @brief The State enum The current state to indicate whether the communication with sensor has
      * been successful or not.

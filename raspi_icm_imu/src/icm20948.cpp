@@ -174,17 +174,42 @@ void icm20948::acquireImuReadings()
     lowHighAccelBuffer[1] =
         wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_ACCEL_ZOUT_L);
     rawAccelBuffer[2] = (lowHighAccelBuffer[0] << 8) | lowHighAccelBuffer[1];
-    // Now we convert the values into g.
-    // ROS_INFO_STREAM("[icm20948::acquireImuReadings]\n Raw ACCEL_X : "
-    //                 << rawAccelBuffer[0] / ACCEL_2G
-    //                 << "\n Raw ACCEL_Y : " << rawAccelBuffer[1] / ACCEL_2G
-    //                 << "\n Raw ACCEL_Z : " << rawAccelBuffer[2] / ACCEL_2G);
+    // Now we convert the values into m/sec2
     mCurrentImuMessage.linear_acceleration.x =
         (rawAccelBuffer[0] / ACCEL_2G) * icm20948::ACCEL_DUE_TO_GRAVITY;
     mCurrentImuMessage.linear_acceleration.y =
         (rawAccelBuffer[1] / ACCEL_2G) * icm20948::ACCEL_DUE_TO_GRAVITY;
     mCurrentImuMessage.linear_acceleration.z =
         (rawAccelBuffer[2] / ACCEL_2G) * icm20948::ACCEL_DUE_TO_GRAVITY;
+    // Gyroscope messages
+    std::array<uint8_t, 2> lowHighGyroBuffer = {0, 0};
+    std::array<int16_t, 3> rawGyroBuffer	 = {0, 0, 0};
+    // // GYRO_X
+    lowHighGyroBuffer[0] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_XOUT_H);
+    lowHighAccelBuffer[1] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_XOUT_L);
+    rawGyroBuffer[0] = (lowHighGyroBuffer[0] << 8) | lowHighGyroBuffer[1];
+    // // GYRO_Y
+    lowHighGyroBuffer[0] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_YOUT_H);
+    lowHighAccelBuffer[1] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_YOUT_L);
+    rawGyroBuffer[1] = (lowHighGyroBuffer[0] << 8) | lowHighGyroBuffer[1];
+    // // GYRO_Z
+    lowHighGyroBuffer[0] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_ZOUT_H);
+    lowHighAccelBuffer[1] =
+        wiringPiI2CReadReg8(mI2cDeviceFileDescriptor, ICM20948REG::I2C_ICM_GYRO_ZOUT_L);
+    rawGyroBuffer[2] = (lowHighGyroBuffer[0] << 8) | lowHighGyroBuffer[1];
+    // Set the values in the IMU message
+    mCurrentImuMessage.angular_velocity.x =
+        (rawGyroBuffer[0] / GYRO_DPS_250) * DEGREES_TO_RAD_FACTOR;
+    mCurrentImuMessage.angular_velocity.y =
+        (rawGyroBuffer[1] / GYRO_DPS_250) * DEGREES_TO_RAD_FACTOR;
+    mCurrentImuMessage.angular_velocity.z =
+        (rawGyroBuffer[2] / GYRO_DPS_250) * DEGREES_TO_RAD_FACTOR;
+    mCurrentImuMessage.header.stamp = ros::Time::now();
     mSetImuValueFunction(mCurrentImuMessage);
 }
 
