@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(raspi_icm_imu)
+project(raspi_icm_pigpio)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -142,11 +142,12 @@ endif()
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 if(${ARCHITECTURE} MATCHES "arm")
-    add_executable(raspi_icu_imu
+    add_executable(raspi_icm_pigpio
         src/icm20948.cpp
         src/raspi_icu_imu.cpp)
 else()
-    add_executable(raspi_icu_imu
+    add_executable(raspi_icm_pigpio
+        src/icm20948.cpp
         src/raspi_icu_imu.cpp)
 endif()
 
@@ -162,12 +163,13 @@ endif()
 
 ## Specify libraries to link a library or executable target against
 if(${ARCHITECTURE} MATCHES "arm")
-    target_link_libraries(raspi_icu_imu
+    target_link_libraries(raspi_icm_pigpio
         ${catkin_LIBRARIES}
-        -lwiringPi
+        -lpigpio
+        -lrt
     )
 else()
-    target_link_libraries(raspi_icu_imu
+    target_link_libraries(raspi_icm_pigpio
         ${catkin_LIBRARIES}
     )
 endif()
